@@ -14,12 +14,43 @@
     enron_data["SKILLING JEFFREY K"]["bonus"] = 5600000
     
 """
-
+import sys
+sys.path.append("../final_project/")
 import pickle
 
+
+f = open("../final_project/poi_names.txt","r+")
+'''
+for i in f.readlines():
+    print i
+'''
+f.close()
+
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r"))
-i = 0
-for key in enron_data:
-    if enron_data[key]['poi']:
-        i += 1
-print i
+
+# s = 'Jeffrey Skilling'
+# print ' '.join(s.upper().split(' ')[::-1])
+
+
+def cal(str1):
+    i = 0
+    j = 0
+    s1 = ' '.join(str1.upper().split(' ')[::-1])
+    for key in enron_data:
+        if s1 in key:
+            print key
+            print enron_data[key]['total_payments']
+            print '-----'
+        if enron_data[key]['email_address'] != 'NaN':
+            i += 1
+        if enron_data[key]['salary'] != 'NaN':
+            j += 1
+        # for key1 in enron_data[key]:
+        #    print key1
+    print i
+    print j
+cal('ss')
+
+print enron_data['COLWELL WESLEY']['from_this_person_to_poi']
+
+
