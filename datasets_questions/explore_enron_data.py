@@ -28,7 +28,7 @@ for i in f.readlines():
 f.close()
 
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r"))
-
+print 'number of data', len(enron_data)
 # s = 'Jeffrey Skilling'
 # print ' '.join(s.upper().split(' ')[::-1])
 
@@ -36,21 +36,29 @@ enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r")
 def cal(str1):
     i = 0
     j = 0
+    k = 0
+    c = 0
     s1 = ' '.join(str1.upper().split(' ')[::-1])
     for key in enron_data:
         if s1 in key:
             print key
             print enron_data[key]['total_payments']
             print '-----'
-        if enron_data[key]['email_address'] != 'NaN':
+        if enron_data[key]['total_payments'] == 'NaN':
             i += 1
-        if enron_data[key]['salary'] != 'NaN':
+        if enron_data[key]['poi'] == 1:
             j += 1
+            if enron_data[key]['poi'] == 1 and enron_data[key]['total_payments'] == 'NaN':
+                c += 1
+        if enron_data[key]['total_payments'] == 'NaN':
+            k += 1
         # for key1 in enron_data[key]:
         #    print key1
     print i
     print j
-# cal('ss')
+    print float(k) / len(enron_data)
+    print 'total_payments percent of POI ',float(c) / j
+cal('Mss')
 
 print enron_data['COLWELL WESLEY']['from_this_person_to_poi']
 
